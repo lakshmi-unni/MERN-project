@@ -39,7 +39,7 @@ const productSchema = new mongoose.Schema({
 
 
 const User = new mongoose.model("User", userSchema)
-const Product= new mongoose.model("products", productSchema)
+const Products= new mongoose.model("Products", productSchema)
 
 
 
@@ -94,7 +94,7 @@ app.post("/addproduct", (req,res) =>{
     const productDetails = req.body
     console.log("product Details >>>" ,
     productDetail);
-    products.create(productDetails ,(err,data) =>{
+    Products.create(productDetails ,(err,data) =>{
         if(err){
             res.status(500).send(err.message)
         }else{
@@ -103,6 +103,19 @@ app.post("/addproduct", (req,res) =>{
 
     })
 });
+
+//list product API
+app.get("/listproduct" ,(req,res) =>{
+    Products.find((err,data) =>{
+        if(err){
+            res.status(500).send(err);
+
+        }
+        else{
+            res.status(200).send(data);
+        }
+    })
+})
 
 
 

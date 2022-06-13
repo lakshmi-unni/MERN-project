@@ -1,10 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 import{Button,Table}from 'react-bootstrap'
 import{Link} from 'react-router-dom'
+import axios from '../axios'
 
 
 
 function ListProduct() {
+    const [products,setProducts] = useState("");
+    const fetchData =async()=>{
+        const data =await axios.get("/listproduct")
+        setProducts(data);
+    };
+    fetchData();
   return (
     <>
          <Link className='btn btn-outline-secondary rounded my-2 btn-sm' to='/'>Back</Link>
