@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import{Button,Table}from 'react-bootstrap'
 import{Link} from 'react-router-dom'
 import axios from '../axios'
@@ -7,11 +7,17 @@ import axios from '../axios'
 
 function ListProduct() {
     const [products,setProducts] = useState("");
-    const fetchData =async()=>{
-        const data =await axios.get("/listproduct")
-        setProducts(data);
-    };
-    fetchData();
+    useEffect(() => {
+        const fetchData =async()=>{
+            const data =await axios.get("/listproduct")
+            setProducts(data);
+        };
+      
+        fetchData();
+
+    }, []);
+    
+    
   return (
     <>
          <Link className='btn btn-outline-secondary rounded my-2 btn-sm' to='/'>Back</Link>
@@ -32,23 +38,18 @@ function ListProduct() {
         </tr>
       </thead>
       <tbody>
+      {products && products?.data.map(
+                    (product) =>(
         <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+            
+          <td>{product.name}</td>
+          <td>{product.price}</td>
+          <td>{product.quantity}</td>
+          <td>{product.catogory}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        ))}
+        
+        
       </tbody>
     </Table>
     <Link  to='/addproduct'> <Button className='btn btn-info rounded my-2 btn-sm'>Add product</Button></Link>
