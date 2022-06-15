@@ -67,10 +67,11 @@ const Registration=()=>{
           <div className="signup_link">
          <Link  to='/login'> <button  onClick={registerData}  className='btn btn-info rounded my-2 btn-sm'> submit</button></Link>
           <button className='btn btn-info rounded my-2 btn-sm float-left ms-5'>clear </button>
-
+<h1>hi</h1>
           </div>
         </form>
       </div>
+      
   
    
   )
